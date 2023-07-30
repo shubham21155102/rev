@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>All Checklists</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='alldatas.css') }}">
+    <style>
+        #data-table td:nth-child(4) {
+            display: none; /* Hide the code by default */
+        }
+
+        #data-table tr:hover td:nth-child(4) {
+            display: block; /* Display the code on hover */
+            background-color: black; /* Apply a black background when the code is displayed */
+            color: white; /* Set the text color to white for better visibility */
+        }
+    </style>
+    <script>
+        function sortTable(columnIndex) {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("data-table");
+            switching = true;
+
+            while (switching) {
+                switching = false;
+                rows = table.getElementsByTagName("tr");
+
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("td")[columnIndex];
+                    y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>All Data</h1>
+    <div>
+        <label for="sort-select">Sort by:</label>
+        <select id="sort-select" onchange="sortTable(this.value)">
+            <option value="0">Topic</option>
+            <option value="2">Question Name</option>
+        </select>
+    </div>
+    <table id="data-table">
+        <thead>
+            <tr>
+                <th>Topic</th>
+                <th>Question Name</th>
+                <th>Question Link</th>
+                <th>Code</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td><a href="{{ row[2] }}" target="_blank">{{ row[2] }}</a></td>
+                <td>{{ row[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>

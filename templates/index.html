@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Revision Checklists</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+  <style>
+    #image-preview {
+      max-width: 200px;
+      max-height: 200px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>DSA Revision Checklist</h1>
+    <form method="POST" action="/save" enctype="multipart/form-data">
+      <label for="topic">Topic:</label>
+      <input type="text" id="name" name="topic" required><br><br>
+      <br><br>
+      <label for="questionname">Question Name:</label>
+      <input type="text" id="name" name="questionname" required><br><br>
+      <label for="questionlink">Question Link:</label>
+      <input type="text" id="name" name="questionlink" required><br><br>
+      <!-- <label for="code" aria-placeholder="Type your code here">Type your code here</label> -->
+      <textarea id="code" name="code" required placeholder="Type your code here"></textarea><br><br>
+      <!-- <input type="code" id="roll" name="year" required> -->
+      <br><br>
+      <input type="submit" value="Submit" class="submit">
+    </form>
+  </div>
+</body>
+
+</html>
